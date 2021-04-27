@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>seller_index</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+    tr,td{padding: 10px;}
+  </style>
+
+<!-- for Back Button Prevention -->
+  <SCRIPT type="text/javascript">
+  window.history.forward();
+  function noBack() { window.history.forward(); }
+  </SCRIPT>
+<!-- for stop Resubmission page on refresh -->
+  <script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+
+
+</head>
+<body onload="noBack();" 
+  onpageshow="if (event.persisted) noBack();" onunload="">
+
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'sellar_index' %}">Smart Watch Hub</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'sellar_index' %}">Home</a></li>
+      
+     <li><a href="{% url 'sellar_add_product' %}">Add Product</a></li>
+     <li><a href="{% url 'sellar_view_product' %}">View Product</a></li>
+     <li><a href="#">My Orders</a></li>  
+      
+    </ul>
+      {% if request.session.email %}
+
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'sellar_edit_profile' %}"><span class="glyphicon glyphicon-edit"></span>Edit Profile</a></li>
+      <li><a href="{% url 'sellar_change_password' %}"><span class="glyphicon glyphicon-edit"></span>Change Password</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span>Logout     {{request.session.fname}}</a></li>
+      <img src="{{request.session.image}}" width="40px" height="40px">
+
+      </ul>
+
+    {% else %}
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    {% endif %}
+    
+  </div>
+</nav>
+  
+
+
+</body>
+</html>
+
+{% block content %}
+{% endblock %}

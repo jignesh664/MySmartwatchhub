@@ -1,0 +1,45 @@
+{% extends 'header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+
+<div class="row">
+
+	
+ 
+	<div class="col-sm-3">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="{{product.product_image.url}}" alt="..." width="400px" height="300px">
+		  <div class="card-body" style="width: 400px;">
+		    <h5 class="card-title">Brand: {{product.product_brand}}</h5>
+		    <p class="card-text">Model: {{product.product_model}}</p>
+		    <p class="card-text">Discription: {{product.product_disc}}</p>
+		    <p class="card-text">Price: {{product.product_price}}</p>
+		    {% if flag1 %}
+		    	<a href="{% url 'remove_from_cart' pk=product.pk %}" class="btn btn-primary">Remove From Cart</a>
+		    {% else %}
+		    	<a href="{% url 'add_to_cart' pk=product.pk %}" class="btn btn-primary">Add to Cart</a>
+		    {% endif %}
+		    
+		    {% if flag %}
+		   		<a href="{% url 'remove_from_wishlist' pk=product.pk %}" class="btn btn-primary">Remove From Wishlist</a>
+			{% else %}
+		    	<a href="{% url 'add_to_wishlist' pk=product.pk %}" class="btn btn-primary">Add to Wishlist
+		    	</a>
+		    {% endif %}
+		  </div>
+		</div>
+	</div>
+	
+
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+
+
+<div class="row">
+	<center>
+		{% if not cart %}
+			<h1>No Item In Cart</h1>
+		{% else %}
+			<h3>Total Item in Cart:{{cart.count}}</h3>
+		{% endif %}	
+
+		<h1> Checkout: {{net_price}}
+		<form name="pay" method="post" action="{% url 'pay' %}">
+			{% csrf_token %}	
+			<input type="hidden" name="amount" value="{{net_price}}">
+		 	<input type="submit" name="action" value="Checkout" class="btn btn-primary"></h1>
+		</form>
+	</center>
+ 
+
+
+	{% for i in cart %}
+
+	<div class="col-sm-3" style="margin-bottom: 100px;">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="{{i.product.product_image.url}}" alt="..." width="300px" height="250px">
+		  <div class="card-body">
+		    <h5 class="card-title">Brand :{{i.product.product_brand}}</h5>
+		    <p class="card-text">Model :{{i.product.product_model}}</p>
+		    
+		    <form name="change_qty" method="POST" action="{% url 'change_qty' %}">
+		    	{% csrf_token %}
+		    	<input type="hidden" name="pk" value="{{i.pk}}">
+		    	Quantity:<input type="number" name="qty" value="{{i.qty}}" min="1" max="10"
+		    	onchange="this.form.submit();">
+		    </form>	
+		    
+		    <p class="card-text">Price:{{i.price}}</p>
+		    <p class="card-text">Price * Quantity :{{i.total_price}}</p>
+		    <a href="{% url 'user_product_detail' pid=i.product.pk %}" class="btn btn-primary">More Details</a>
+		  </div>
+		</div>
+	</div>
+	{% endfor %}
+
+</div>
+
+</body>
+</html>
+{% endblock %}

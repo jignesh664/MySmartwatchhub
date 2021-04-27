@@ -1,0 +1,32 @@
+{% extends 'sellar_header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+
+<div class="row">
+
+	{% for i in products %}
+
+	<div class="col-sm-3" style="margin-bottom: 100px;">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="{{i.product_image.url}}" alt="..." width="300px" height="250px">
+		  <div class="card-body">
+		    <h5 class="card-title">{{i.product_brand}}</h5>
+		    <p class="card-text">{{i.product_model}}</p>
+		    <a href="{% url 'sellar_product_detail' pk=i.pk %}" class="btn btn-primary">More Details</a>
+		  </div>
+		</div>
+	</div>
+	{% endfor %}
+
+</div>
+
+</body>
+</html>
+{% endblock %}

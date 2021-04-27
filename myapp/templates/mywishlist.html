@@ -1,0 +1,40 @@
+{% extends 'header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+
+
+<div class="row">
+	<center>
+		{% if not wishlist %}
+			<h1>No Item In Wishlist</h1>
+		{% else %}
+			<h3>Total Item in Wishlist: {{wishlist.count}}</h3>
+		{% endif %}	
+	</center>
+
+	{% for i in wishlist %}
+
+	<div class="col-sm-3" style="margin-bottom: 100px;">
+		<div class="card" style="width: 18rem;">
+		  <img class="card-img-top" src="{{i.product.product_image.url}}" alt="..." width="300px" height="250px">
+		  <div class="card-body">
+		    <h5 class="card-title">{{i.product.product_brand}}</h5>
+		    <p class="card-text">{{i.product.product_model}}</p>
+		    <a href="{% url 'user_product_detail' pid=i.product.pk %}" class="btn btn-primary">More Details</a>
+		  </div>
+		</div>
+	</div>
+	{% endfor %}
+
+</div>
+
+</body>
+</html>
+{% endblock %}

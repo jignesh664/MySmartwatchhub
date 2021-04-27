@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>index</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+    tr,td{padding: 10px;}
+  </style>
+
+<!-- for Back Button Prevention -->
+<SCRIPT type="text/javascript">
+  window.history.forward();
+  function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<!-- for stop Resubmission page on refresh -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+
+</head>
+<body onload="noBack();" 
+  onpageshow="if (event.persisted) noBack();" onunload="">
+
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Smart Watch Hub</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Brands<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'user_view_product' pb='all' %}">All</a></li>
+          <li><a href="{% url 'user_view_product' pb='Apple' %}">Apple</a></li>
+          <li><a href="{% url 'user_view_product' pb='Samsung' %}">Samsung</a></li>
+          <li><a href="{% url 'user_view_product' pb='MI' %}">MI</a></li>
+          <li><a href="{% url 'user_view_product' pb='FitBit' %}">FitBit</a></li>
+          <li><a href="{% url 'user_view_product' pb='Fasttrack' %}">Fasttrack</a></li>
+          <li><a href="{% url 'user_view_product' pb='Realme' %}">Realme</a></li>
+          <li><a href="{% url 'user_view_product' pb='Fossil' %}">Fossil</a></li>
+          <li><a href="{% url 'user_view_product' pb='Amazefit' %}">Amazefit</a></li>
+          <li><a href="{% url 'user_view_product' pb='Noise' %}">Noise</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    {% if request.session.email %}
+
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="{% url 'mycart' %}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{request.session.cart_count}})</a></li> 
+      <li><a href="{% url 'mywishlist' %}"><span class="glyphicon glyphicon-heart"></span>Wishlist({{request.session.wishlist_count}})</a></li>
+      <li><a href="{% url 'edit_profile' %}"><span class="glyphicon glyphicon-edit"></span>Edit Profile</a></li>
+      <li><a href="{% url 'change_password' %}"><span class="glyphicon glyphicon-edit"></span>Change Password</a></li>
+      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span>Logout     {{request.session.fname}}</a></li>
+      <img src="{{request.session.image}}" width="40px" height="40px">
+
+      </ul>
+
+    {% else %}
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    {% endif %}
+    
+  </div>
+</nav>
+  
+
+
+</body>
+</html>
+
+{% block content %}
+{% endblock %}
